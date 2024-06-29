@@ -1,0 +1,53 @@
+#docker-compose.yml
+version: "3.5"
+
+services:
+#  redis:
+#    image: 'bitnami/redis:latest'
+#    environment:
+#      - ALLOW_EMPTY_PASSWORD=yes
+#    volumes:
+#      - 'redis_data:/bitnami/redis/data'
+
+#  redis_db:
+#    image: "redis:alpine"
+##    ports:
+##      - '6379:6379'
+##    command: redis-server --save 20 1 --loglevel warning --${PWD_REDIS}
+##    volumes:
+##      - cache:/data
+##
+##    environment:
+##      - ALLOW_EMPTY_PASSWORD=yes
+#
+#    command: redis-server --requirepass ${PWD_REDIS}
+#    ports:
+#      - "6379:6379"
+#    volumes:
+#      - $PWD/redis-data:/var/lib/redis
+#      - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
+#    environment:
+#      - REDIS_REPLICATION_MODE=master
+#    networks:
+#      app_network_redis_aiogram:
+#        ipv4_address: 192.168.56.5
+#
+  app:
+    build: .
+    container_name: bot_service_appointment
+#    volumes: ['./database:/app/database/', './logs/:/app/logs/']
+    volumes: ['./logs/:/app/logs/']
+    command: ["python", "main.py"]
+    ports:
+#      - "7799:7799"
+      - "8001:8001"
+#    depends_on:
+#      - redis_db
+    networks:
+      - proxynet
+
+
+networks:
+  proxynet:
+    name: app_fastapi_postgres_app_fastapi_network
+    external: true
