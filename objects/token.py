@@ -1,4 +1,5 @@
 """Модуль схема токена."""
+
 from pydantic import BaseModel
 
 

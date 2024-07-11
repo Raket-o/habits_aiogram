@@ -1,4 +1,5 @@
 """ Модуль команды /start."""
+
 import logging
 
 from aiogram import types
@@ -19,11 +20,7 @@ async def start_command(message: [types.CallbackQuery, types.Message]) -> None:
     kb = greeting_buttons()
 
     if isinstance(message, types.Message):
-        await message.answer(
-            START_MESSAGE,
-            parse_mode="HTML",
-            reply_markup=kb
-        )
+        await message.answer(START_MESSAGE, parse_mode="HTML", reply_markup=kb)
 
     elif isinstance(message, types.CallbackQuery):
         await message.message.answer(

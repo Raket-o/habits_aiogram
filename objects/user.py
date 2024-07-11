@@ -1,4 +1,5 @@
 """Модуль схема пользователя."""
+
 from pydantic import BaseModel
 
 from objects.token import Token

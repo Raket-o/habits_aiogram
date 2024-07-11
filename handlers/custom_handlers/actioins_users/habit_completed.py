@@ -1,8 +1,9 @@
 """Модуль обработки ответа от пользователя выполнил ли привычку или нет."""
-from aiogram import types
-from utils.api_manager import ApiManager
-from objects.user import user_obj
 
+from aiogram import types
+
+from objects.user import user_obj
+from utils.api_manager import ApiManager
 
 API_MANAGER = ApiManager()
 
@@ -13,7 +14,9 @@ async def habit_comp_1(message: types.Message) -> None:
     habit_id = data[1]
     params = {"token": str(user_obj.token), "habit_id": int(habit_id)}
 
-    status, response = await API_MANAGER.send_post(url="api/habits/<int:habit_id>/fulfilling", params=params)
+    status, response = await API_MANAGER.send_post(
+        url="api/habits/<int:habit_id>/fulfilling", params=params
+    )
 
     if status == 201:
         txt = "Вы молодец, я в это верил"

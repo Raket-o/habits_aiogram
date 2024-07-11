@@ -1,8 +1,10 @@
 """Модуль логаут."""
+
 from aiogram import types
+
+from handlers.default_heandlers.start import start_command
 from objects.token import token_obj
 from objects.user import user_obj
-from handlers.default_heandlers.start import start_command
 
 
 async def logout_hand_1(message: types.Message):

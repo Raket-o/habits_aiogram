@@ -1,4 +1,5 @@
 """ Модуль запуска телеграмм бота."""
+
 import asyncio
 
 from aiogram import Bot, Dispatcher

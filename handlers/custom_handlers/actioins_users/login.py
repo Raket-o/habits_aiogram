@@ -1,15 +1,14 @@
 """Модуль аутентификации и авторизации."""
+
 from aiogram import types
 from aiogram.fsm.context import FSMContext
 
+from handlers.custom_handlers.actioins_users.main_menu import main_menu_hand_1
+from handlers.default_heandlers.start import start_command
 from objects.token import token_obj
 from objects.user import user_obj
 from states.states import LoginUserState
 from utils.api_manager import ApiManager
-from handlers.default_heandlers.start import start_command
-
-from handlers.custom_handlers.actioins_users.main_menu import main_menu_hand_1
-
 
 API_MANAGER = ApiManager()
 
@@ -40,7 +39,10 @@ async def login_hand_3(message: types.Message, state: FSMContext):
 
     data = {"username": username, "password": password}
 
-    status, response = await API_MANAGER.send_post(url="api/auth/token", data=data)
+    status, response = await API_MANAGER.send_post(
+        url="api/auth/token",
+        data=data
+    )
 
     if status != 200:
         await message.answer("неверное имя или пароль")
