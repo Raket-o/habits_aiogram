@@ -1,9 +1,6 @@
-"""Модуль обработки просмотра записей."""
+"""Модуль регистрации пользователя."""
 from aiogram import types
 from aiogram.fsm.context import FSMContext
-
-# from database import transactions
-# from keyboards.reply.list_button import list_button
 from states.states import RegisterUserState
 from utils.api_manager import ApiManager
 from handlers.default_heandlers.start import start_command
@@ -15,17 +12,14 @@ KB = cancel_buttons()
 
 
 async def register_hand_1(message: types.Message, state: FSMContext):
-    """Функция register_hand_1. Запрашивает в базе записи и выводит их пользователю."""
+    """Функция register_hand_1. Ожидает ввод от пользователя.."""
     await message.message.delete()
-    # kb = cancel_buttons()
     await message.message.answer("Введите имя", reply_markup=KB)
-    # await message.message.delete()
-
     await state.set_state(RegisterUserState.username)
 
 
 async def register_hand_2(message: types.Message, state: FSMContext):
-    """Функция register_hand_2. Запрашивает в базе записи и выводит их пользователю."""
+    """Функция register_hand_2. Ожидает ввод от пользователя."""
     await message.delete()
     username = message.text
     await state.update_data({"username": username})
@@ -36,8 +30,7 @@ async def register_hand_2(message: types.Message, state: FSMContext):
 
 
 async def register_hand_3(message: types.Message, state: FSMContext):
-    """Функция register_hand_3. Запрашивает в базе записи и выводит их пользователю."""
-    # await message.delete()
+    """Функция register_hand_3. Отправляет запрос с данными для регистрации нового пользователя."""
     context_data = await state.get_data()
     username = context_data.get("username")
     password = message.text

@@ -13,22 +13,18 @@ async def cancel_handler_1(message: Message, state: FSMContext) -> None:
     Функция сбрасывает состояние пользователя.
     """
     logging.info("cancel_handler")
-
     current_state = await state.get_state()
     if current_state is None:
         await message.answer(
-            "Отмена.",
+            "Отмена",
             reply_markup=ReplyKeyboardRemove(),
         )
-        # await start_command(message)
-        # return
 
     logging.info("Cancelling state %r", current_state)
     await state.clear()
     await message.answer(
-        "Отмена.",
+        "Отмена",
         reply_markup=ReplyKeyboardRemove(),
     )
 
     await start_command(message)
-

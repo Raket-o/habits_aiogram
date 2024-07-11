@@ -1,6 +1,7 @@
+"""Модуль менеджера API."""
 import aiohttp
 
-from typing import Tuple, Any
+from typing import Any
 
 from config_data.config import URL_BACKEND_SERVER as url_from_config
 
@@ -18,10 +19,7 @@ class ApiManager:
     ) -> tuple[int, Any]:
         async with aiohttp.ClientSession() as session:
             async with session.get(f"{cls.URL_BACKEND_SERVER}/{url}", data=data, params=params, headers=headers) as response:
-                # print("send_get======================= ", response)
                 return response.status, await response.json()
-                # return response.status, response
-                # return response
 
     @classmethod
     async def send_post(
@@ -60,4 +58,3 @@ class ApiManager:
         async with aiohttp.ClientSession() as session:
             async with session.patch(url=f"{cls.URL_BACKEND_SERVER}/{url}", json=json, data=data, params=params) as response:
                 return response.status
-                # return response

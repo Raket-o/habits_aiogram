@@ -1,24 +1,18 @@
+"""Модуль схема токена."""
 from pydantic import BaseModel
 
 
 class Token(BaseModel):
     token: str = None
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.token
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.token
 
-    def __del__(self):
+    def __del__(self) -> None:
         self.token = None
-        # print('Object destroyed')
-
-    # def __enter__(self):
-    #     return self
-    # def __exit__(self, exc_type, exc_val, exc_tb):
-    #     print("bye")
-    #     del self.token
 
 
 token_obj = Token()

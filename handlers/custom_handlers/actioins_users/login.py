@@ -1,11 +1,7 @@
-"""Модуль обработки просмотра записей."""
-import aiohttp
-
+"""Модуль аутентификации и авторизации."""
 from aiogram import types
 from aiogram.fsm.context import FSMContext
 
-# from database import transactions
-# from keyboards.reply.list_button import list_button
 from objects.token import token_obj
 from objects.user import user_obj
 from states.states import LoginUserState
@@ -19,24 +15,23 @@ API_MANAGER = ApiManager()
 
 
 async def login_hand_1(message: types.Message, state: FSMContext):
-    """Функция login_hand_1. Запрашивает в базе записи и выводит их пользователю."""
+    """Функция login_hand_1. Ожидает ввод от пользователя."""
     await message.message.delete()
     await message.message.answer("Введите имя")
     await state.set_state(LoginUserState.username)
 
 
 async def login_hand_2(message: types.Message, state: FSMContext):
-    """Функция login_hand_2. Запрашивает в базе записи и выводит их пользователю."""
+    """Функция login_hand_2. Ожидает ввод от пользователя."""
     await message.delete()
     username = message.text
     await state.update_data({"username": username})
-
     await message.answer("Введите пароль")
     await state.set_state(LoginUserState.password)
 
 
 async def login_hand_3(message: types.Message, state: FSMContext):
-    """Функция login_hand_3. Запрашивает в базе записи и выводит их пользователю."""
+    """Функция login_hand_3. Отправляет запрос для получения токена."""
     await message.delete()
     context_data = await state.get_data()
     username = context_data.get("username")
@@ -55,7 +50,5 @@ async def login_hand_3(message: types.Message, state: FSMContext):
         user_obj.telegram_id = telegram_id
         user_obj.username = username
         user_obj.token = token_obj
-        # print(user_obj)
         await state.clear()
-
         await main_menu_hand_1(message)

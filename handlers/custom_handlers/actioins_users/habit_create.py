@@ -1,11 +1,9 @@
-"""Модуль обработки просмотра записей."""
+"""Модуль обработки создание привычки."""
 import datetime
 
 from aiogram import types
 from aiogram.fsm.context import FSMContext
 
-# from database import transactions
-# from keyboards.reply.list_button import list_button
 from states.states import CreateHabitState
 from utils.api_manager import ApiManager
 from handlers.custom_handlers.actioins_users.main_menu import main_menu_hand_1
@@ -17,19 +15,15 @@ API_MANAGER = ApiManager()
 
 
 async def create_habit_hand_1(message: types.Message, state: FSMContext) -> None:
-    """Функция create_habit_hand_1. Запрашивает в базе записи и выводит их пользователю."""
+    """Функция create_habit_hand_1. Ожидает ввод от пользователя."""
     await message.message.delete()
-    # await message.message.delete()
     await message.message.answer("Введите название привычки")
-    # await message.message.delete()
     await state.set_state(CreateHabitState.name)
 
 
 async def create_habit_hand_2(message: types.Message, state: FSMContext) -> None:
-    """Функция create_habit_hand_2. Запрашивает в базе записи и выводит их пользователю."""
+    """Функция create_habit_hand_2. Ожидает ввод от пользователя."""
     await message.delete()
-
-    # await message.delete()
     habit_name = message.text
     await state.update_data({"habit_name": habit_name})
     await message.answer("Введите описание")
@@ -37,7 +31,7 @@ async def create_habit_hand_2(message: types.Message, state: FSMContext) -> None
 
 
 async def create_habit_hand_3(message: types.Message, state: FSMContext) -> None:
-    """Функция create_habit_hand_3. Запрашивает в базе записи и выводит их пользователю."""
+    """Функция create_habit_hand_3. Ожидает ввод от пользователя."""
     await message.delete()
     habit_description = message.text
     await state.update_data({"habit_description": habit_description})
@@ -46,7 +40,7 @@ async def create_habit_hand_3(message: types.Message, state: FSMContext) -> None
 
 
 async def create_habit_hand_4(message: types.Message, state: FSMContext) -> None:
-    """Функция create_habit_hand_4. Запрашивает в базе записи и выводит их пользователю."""
+    """Функция create_habit_hand_4. Отправляет запрос на создание привычки."""
 
     await message.delete()
     alert_time = message.text

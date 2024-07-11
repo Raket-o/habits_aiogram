@@ -1,13 +1,6 @@
-"""Модуль обработки просмотра записей."""
-import datetime
-
+"""Модуль обработки ответа от пользователя выполнил ли привычку или нет."""
 from aiogram import types
-from aiogram.fsm.context import FSMContext
-
-from states.states import CreateHabitState
 from utils.api_manager import ApiManager
-from handlers.custom_handlers.actioins_users.main_menu import main_menu_hand_1
-
 from objects.user import user_obj
 
 
@@ -15,8 +8,7 @@ API_MANAGER = ApiManager()
 
 
 async def habit_comp_1(message: types.Message) -> None:
-    """Функция habit_comp_1. Запрашивает в базе записи и выводит их пользователю."""
-    # await message.message.delete()
+    """Функция habit_comp_1. Проставляет выполнение привычки."""
     data = message.data.split("=")
     habit_id = data[1]
     params = {"token": str(user_obj.token), "habit_id": int(habit_id)}
@@ -33,10 +25,9 @@ async def habit_comp_1(message: types.Message) -> None:
         await message.message.delete()
 
     await message.answer(txt)
-    # await message.message.delete()
 
 
 async def habit_did_not_comp_1(message: types.Message) -> None:
-    """Функция habit_did_not_comp_1. Запрашивает в базе записи и выводит их пользователю."""
+    """Функция habit_did_not_comp_1. Выводи сообщение и удаляет предыдущие."""
     await message.answer("Это печально")
     await message.message.delete()

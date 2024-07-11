@@ -21,3 +21,4 @@ async def main(bot: Bot, dp: Dispatcher) -> None:
 
 if __name__ == "__main__":
     asyncio.run(main(bot, dp))
+    # URL_BACKEND_SERVER = "http://192.168.55.5:8000"
