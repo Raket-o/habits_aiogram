@@ -15,7 +15,10 @@ API_MANAGER = ApiManager()
 
 
 async def edit_habit_hand(message: [types.CallbackQuery, types.Message]):
-    """Функция edit_habit_hand. Выводит клавиатуру пользователю."""
+    """
+    Функция edit_habit_hand.
+    Выводит клавиатуру пользователю.
+    """
     await message.message.delete()
     data = message.data.split("=")
     habit_id = int(data[1])
@@ -26,7 +29,10 @@ async def edit_habit_hand(message: [types.CallbackQuery, types.Message]):
 async def edit_name_habit_hand_1(
     message: types.CallbackQuery, state: FSMContext
 ) -> None:
-    """Функция edit_name_habit_hand_1. Ожидает ввод от пользователя."""
+    """
+    Функция edit_name_habit_hand_1.
+    Ожидает ввод от пользователя.
+    """
     await message.message.delete()
     data = message.data.split("=")
     habit_id = data[1]
@@ -40,7 +46,10 @@ async def edit_name_habit_hand_1(
 async def edit_name_habit_hand_2(
     message: types.CallbackQuery, state: FSMContext
 ) -> None:
-    """Функция edit_name_habit_hand_2. Ожидает ввод от пользователя."""
+    """
+    Функция edit_name_habit_hand_2.
+    Ожидает ввод от пользователя.
+    """
     await message.delete()
     habit_name = message.text
     context_data = await state.get_data()
@@ -60,7 +69,10 @@ async def edit_name_habit_hand_2(
 async def edit_description_habit_hand_1(
     message: types.CallbackQuery, state: FSMContext
 ) -> None:
-    """Функция edit_description_habit_hand_1. Ожидает ввод от пользователя."""
+    """
+    Функция edit_description_habit_hand_1.
+    Ожидает ввод от пользователя.
+    """
     await message.message.delete()
     data = message.data.split("=")
     habit_id = data[1]
@@ -95,7 +107,10 @@ async def edit_description_habit_hand_2(
 async def edit_alert_time_habit_hand_1(
     message: types.CallbackQuery, state: FSMContext
 ) -> None:
-    """Функция edit_alert_time_habit_hand_1. Ожидает ввод от пользователя."""
+    """
+    Функция edit_alert_time_habit_hand_1.
+    Ожидает ввод от пользователя.
+    """
     await message.message.delete()
     data = message.data.split("=")
     habit_id = data[1]
