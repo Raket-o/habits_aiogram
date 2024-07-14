@@ -1,12 +1,11 @@
 FROM python:3.12-slim
 
-RUN mkdir /app
+ENV PYTHONUNBUFFERED=1
 
-COPY requirements.txt /app/
-
-RUN python -m pip install --upgrade pip
-
-RUN python -m pip install -r /app/requirements.txt
+RUN pip install --upgrade pip "poetry"
+RUN poetry config virtualenvs.create false --local
+COPY pyproject.toml poetry.lock ./
+RUN poetry install
 
 COPY . /app/
 
